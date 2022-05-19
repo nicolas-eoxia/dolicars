@@ -113,7 +113,9 @@ class Cars extends CommonObject
 		'fk_user_modif' => array('type'=>'integer:User:user/class/user.class.php', 'label'=>'UserModif', 'enabled'=>'1', 'position'=>511, 'notnull'=>-1, 'visible'=>-2,),
 		'import_key' => array('type'=>'varchar(14)', 'label'=>'ImportId', 'enabled'=>'1', 'position'=>1000, 'notnull'=>-1, 'visible'=>-2,),
 		'status' => array('type'=>'integer', 'label'=>'Status', 'enabled'=>'1', 'position'=>1000, 'notnull'=>1, 'visible'=>1, 'index'=>1, 'arrayofkeyval'=>array('0'=>'Brouillon', '1'=>'Valid&eacute;', '9'=>'Annul&eacute;'), 'validate'=>'1',),
-		'last_main_doc' => array('type'=>'varchar(255)', 'label'=>'LastMainDoc', 'enabled'=>'1', 'position'=>600, 'notnull'=>0, 'visible'=>0,),
+		'power' => array('type'=>'double(24,8)', 'label'=>'Power', 'enabled'=>'1', 'position'=>70, 'notnull'=>0, 'visible'=>1,),
+		'sport_mode' => array('type'=>'boolean', 'label'=>'SportMode', 'enabled'=>'1', 'position'=>80, 'notnull'=>0, 'visible'=>1,),
+		'circulation_date' => array('type'=>'datetime', 'label'=>'CirculationDate', 'enabled'=>'1', 'position'=>90, 'notnull'=>0, 'visible'=>1,),
 	);
 	public $rowid;
 	public $ref;
@@ -126,7 +128,9 @@ class Cars extends CommonObject
 	public $fk_user_modif;
 	public $import_key;
 	public $status;
-	public $last_main_doc;
+	public $power;
+	public $sport_mode;
+	public $circulation_date;
 	// END MODULEBUILDER PROPERTIES
 
 
@@ -534,7 +538,7 @@ class Cars extends CommonObject
 
 			dol_syslog(get_class($this)."::validate()", LOG_DEBUG);
 			$resql = $this->db->query($sql);
-			
+
 			if (!$resql) {
 				dol_print_error($this->db);
 				$this->error = $this->db->lasterror();
